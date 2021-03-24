@@ -1,0 +1,33 @@
+.PHONY: all
+all: .prerequisites/p7zip-full .prerequisites/lzip .prerequisites/intltool
+
+
+.prerequisites/p7zip-full: | /usr/bin/7za .prerequisites
+	touch .prerequisites/p7zip-full
+
+/usr/bin/7za:
+	sudo zypper install -y p7zip-full
+
+
+.prerequisites/lzip: | /usr/bin/lzip .prerequisites
+	touch .prerequisites/lzip
+
+/usr/bin/lzip: 
+	sudo zypper install -y lzip
+	
+.prerequisites/intltool: | /usr/bin/intltoolize .prerequisites
+	touch .prerequisites/intltoolize
+
+/usr/bin/intltoolize:
+	sudo zypper install -y intltool
+
+.prerequisites/gdk-pixbuf-devel: | /usr/lib64/libgdk_pixbuf-2.0.so .prerequisites
+	touch .prerequisites/gdk-pixbuf-devel
+	
+/usr/lib64/libgdk_pixbuf-2.0.so:
+	sudo zypper install -y gdk-pixbuf-devel
+	
+	
+.prerequisites:
+	mkdir -p .prerequisites
+
